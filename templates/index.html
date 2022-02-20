@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ウラアカ批評空間</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .button {
+        background-color: #bd93f9; 
+        color: black; 
+        border: 2px solid #4CAF50;
+        }
+
+        .button:hover {
+        background-color: #cdb1f5;
+        color: black;
+        } 
+    </style>
+</head>
+
+<body style="background-color:#282a36;">
+    <div class="container mt-3">
+        <form action="/newpost" method="POST">
+            <div class="form-group mb-3 mt-3 ">
+                <textarea class="form-control text-white border-bottom-0" style="background-color:#4e5267;"name="body" rows="10" ></textarea>
+                <input type="submit" class="btn col-12 border-white button"  value="Post">
+                
+            </div>
+        </form>
+    </div>
+    {{/* 在 Posts 中循环每个 Post 的内容 */}}
+    <div class="container">
+        {{range .Posts}}
+        <br>
+        <div class="card text-white" style="background-color:#333544;">
+            <div class="card-body">{{.TimeHTML}}<br>{{.TextHTML}}</div>
+        </div>
+        {{end}}
+    </div>
+    {{/* 循环结束 */}}
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+# regular docker related files
+/.dockerignore
+/Dockerfile
+/docker-compose.yml
+
+# compiled binary
+uraaka
+# stored posts plain file
+posts
