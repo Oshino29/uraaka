@@ -1,0 +1,1 @@
+“Uraaka(裏垢)” is an twitter slang from Japanese, means posting anonymous contents with a hidden account
