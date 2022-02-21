@@ -11,9 +11,9 @@ import (
 )
 
 type Post struct {
-	Text string
+	Text     string
 	TextHTML template.HTML
-	Time string
+	Time     string
 	TimeHTML string
 }
 type Posts []Post
@@ -32,10 +32,11 @@ func main() {
 }
 
 func HandlePost(rw http.ResponseWriter, r *http.Request) {
-	p := Post{Text: (r.FormValue("body")), Time: time.Now().Format("2006-01-02_1504")}
+	p := Post{Text: (r.FormValue("body")), Time: time.Now().Format(TimeFormats["inFile"])}
 	// SavePost(&post)
 	p.Save()
-	rw.Write([]byte(p.Text))
+	// rw.Write([]byte(p.Text))
+	http.Redirect(rw, r, r.Header.Get("Referer"), http.StatusFound)
 }
 
 func ShowPosts(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +52,7 @@ func ShowPosts(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	for i := len(filenames) -1 ; i >= 0; i--{
+	for i := len(filenames) - 1; i >= 0; i-- {
 		ppp = append(ppp, *LoadPost(filenames[i].Name()))
 	}
 	// ppp = append(ppp, *LoadPost("2022-02-21_1837"))
