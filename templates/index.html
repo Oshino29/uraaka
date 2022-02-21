@@ -32,7 +32,7 @@
         {{range .Posts}}
         <br>
         <div class="card bg-info text-white">
-            <div class="card-body">{{printf "%s" .Text}}</div>
+            <div class="card-body">{{.TimeHTML}}<br>{{.TextHTML}}</div>
         </div>
         {{end}}
     </div>
