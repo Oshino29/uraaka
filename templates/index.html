@@ -36,7 +36,8 @@
         {{range .Posts}}
         <br>
         <div class="card text-white" style="background-color:#333544;">
-            <div class="card-body">{{.TimeHTML}}<br>{{.TextHTML}}</div>
+            <!-- 之后应该删掉这里的 .TimeHTML -->
+        <div class="card-body">{{.Time}}{{.TimeHTML}}<br>{{.TextHTML}}</div>
         </div>
         {{end}}
     </div>
