@@ -19,7 +19,7 @@ import (
 // }
 // type Posts []Post
 
-var DB string = "uraaka.db"
+var DB string = "/data/uraaka.db"
 
 type PageData struct {
 	// Pagetext string
@@ -31,8 +31,8 @@ func main() {
 	// http.Handle("/", http.FileServer(http.Dir("public")))
 	http.HandleFunc("/", ShowPosts)
 	http.HandleFunc("/migrate", Migrate)
-	http.ListenAndServe("0.0.0.0:8080", nil)
 
+	http.ListenAndServe("0.0.0.0:8080", nil)
 }
 
 func NewPost(rw http.ResponseWriter, r *http.Request) {

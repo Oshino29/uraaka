@@ -1,20 +1,37 @@
-FROM golang:alpine AS build
+# build layer
+FROM golang:1.17-alpine AS build
 RUN apk add build-base git
-WORKDIR /src
+WORKDIR /app
 COPY . .
-RUN go build -o uraaka
 
-ARG user=uraaka
-ARG group=uraaka
-ARG uid=1000
-ARG gid=1000
-RUN groupadd -g ${gid} ${group} && useradd -u ${uid} -G ${group} -s /bin/sh -D ${user}
+RUN go mod download
+RUN go build
 
 
+
+# app layer
 FROM alpine:latest
-COPY --from=build /src/uraaka /app/uraaka
 WORKDIR /app
 EXPOSE 8080
 
-USER ${user}
-CMD ["/app/uraaka"]
+ENV USER=uraaka
+ENV GROUP=uraaka
+ENV UID=1000
+ENV GID=1000
+RUN addgroup -g $GID $GROUP &&\
+    adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "${pwd}" \
+    --ingroup "$GROUP" \
+    --no-create-home \
+    --uid "$UID" \
+    "$USER"
+ENV TZ="Asia/Shanghai"
+RUN apk add --no-cache tzdata
+
+COPY --from=build --chown=uraaka:uraaka /app/uraaka /app/uraaka
+COPY --from=build --chown=uraaka:uraaka /app/templates /app/templates
+
+RUN mkdir /data && chown uraaka:uraaka /data
+CMD [ "/app/uraaka" ]
