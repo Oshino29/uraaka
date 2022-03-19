@@ -17,7 +17,7 @@ func (s *Storage) AddRawPost(p *post.Post) bool {
 
 func (s *Storage) LoadPosts() []post.Post {
 	//query row
-	rows, _ := s.db.Query("SELECT post, html, time FROM posts ORDER by id DESC")
+	rows, _ := s.db.Query("SELECT post, html, time FROM posts ORDER by time DESC")
 	defer rows.Close()
 
 	ppp := make([]post.Post, 0)
