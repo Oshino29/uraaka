@@ -13,11 +13,10 @@ type Storage struct {
 	db *sql.DB
 }
 
-func New(path string) (*Storage, error) {
+func New(path string) *Storage {
 	db, err := sql.Open("sqlite3", path)
 	if err != nil {
 		log.Fatal("can't create or open database" + "\n" + err.Error())
-		return nil, err
 	}
 
 	db.SetMaxOpenConns(1)
@@ -29,7 +28,7 @@ func New(path string) (*Storage, error) {
 	// 	return nil, err
 	// }
 	
-	return s, err
+	return s
 
 }
 func (s *Storage) Init() error {

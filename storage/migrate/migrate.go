@@ -1,7 +1,6 @@
 package migrate
 
 import (
-	"log"
 	"oshino29/uraaka/storage"
 )
 
@@ -25,11 +24,7 @@ func New(dbPath, postsPath, censorWordsPath string) *Migrate {
 	if postsPath == "" {postsPath = "posts"}
 	if censorWordsPath == "" {censorWordsPath = "censorList.txt"}
 
-	var err error
-	m.Storage, err = storage.New(dbPath)
-	if err != nil {
-		log.Fatalf("can't open %s while init Migrate.Storage", dbPath)
-	}
+	m.Storage = storage.New(dbPath)
 
 	m.postsPath = postsPath
 	m.censorWordsPath = censorWordsPath

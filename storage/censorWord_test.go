@@ -6,10 +6,7 @@ import (
 )
 
 func TestAddCensorWord(t *testing.T) {
-	s, err := New("censor_test.db")
-	if err != nil {
-		t.Errorf("can't open test.db for testing\n%s", err.Error())
-	}
+	s := New("censor_test.db")
 
 	s.AddCensorWord("CensorTestWord")
 
@@ -32,10 +29,7 @@ func TestAddCensorWord(t *testing.T) {
 }
 
 func TestLoadCensorWords(t *testing.T) {
-	s, err := New("censor_test.db")
-	if err != nil {
-		t.Errorf("can't open test database for testing\n%s", err.Error())
-	}
+	s := New("censor_test.db")
 
 	test_www := &([]string{"xc", "北京", "bgm.tv"})
 	for _, test_w := range *test_www {

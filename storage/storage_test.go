@@ -22,20 +22,14 @@ func (s *Storage) ListPosts(t *testing.T) {
 }
 
 func TestNew(t *testing.T) {
-	s, err := New(db)
-	if err != nil {
-		t.Errorf("failed to create %s", db)
-	}
+	s := New(db)
 	s.Init()
 	s.ListPosts(t)
 }
 
 func TestInit(t *testing.T) {
-	s, err := New(db)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
+	s := New(db)
+	
 	statement, _ := s.db.Prepare("INSERT INTO posts (post, time) VALUES (?, ?)")
 	statement.Exec("试试", "2022-03-16 21:40")
 
