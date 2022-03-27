@@ -38,7 +38,7 @@ func ShowPosts(w http.ResponseWriter, r *http.Request) {
 	fp := path.Join("templates", "index.html")
 	tmpl := template.Must(template.ParseFiles(fp))
 
-	ppp := S.LoadPosts()
+	ppp := S.LoadRecentPosts()
 	data := PageData{
 		Posts: ppp,
 	}
@@ -48,7 +48,7 @@ func ShowPosts(w http.ResponseWriter, r *http.Request) {
 func Migrate(w http.ResponseWriter, r *http.Request) {
 	m := migrate.New(DB, "", "")
 	m.Migrate()
-	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
+	http.Redirect(w, r, r.Header.Get("Refe rer"), http.StatusFound)
 }
 
 func NewCensor(w http.ResponseWriter, r *http.Request) {
