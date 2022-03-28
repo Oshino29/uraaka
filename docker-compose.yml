@@ -1,0 +1,15 @@
+---
+version: "2.1"
+
+services:
+  uraaka:
+    image: oshino29/uraaka:latest
+    container_name: uraaka
+    volumes:
+      - ${DOCKER_DATA}/uraaka:/data
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: nginx

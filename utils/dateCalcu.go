@@ -23,21 +23,25 @@ var TimeFormats = []string{
 	"2006-01-02_1504.post",
 }
 
+const LOCALE = "Asia/Shanghai"
+
 // return the hours between of given string and now
 func HoursPast(timeString string) float64 {
+	// time.lo
 
-
-	t, err := ParseTime(timeString)
+	timeParsed, err := ParseTime(timeString)
 	if err != nil {
 		fmt.Print(err.Error())
 		return -1
 	}
-	return time.Since(t).Hours()
+	// return time.Since(timeParsed).Hours()
+	fmt.Printf("time.Now() in utils/dateCalcu.go/HoursPast() has returned:\n\t%s\n", time.Now().String())
+	return time.Now().Sub(timeParsed).Hours()
 }
 
 func ParseTime(timeString string) (time.Time, error) {
 	for _, format := range TimeFormats {
-        postTime, err := time.Parse(format, timeString)
+        postTime, err := time.ParseInLocation(format, timeString, time.Local)
         if err == nil {
             return postTime, nil
         }

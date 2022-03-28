@@ -8,6 +8,7 @@ import (
 	"path"
 	"time"
 	"oshino29/uraaka/storage/migrate"
+	"log"
 )
 
 var DB string = "/data/uraaka.db"
@@ -25,6 +26,8 @@ func main() {
 	http.HandleFunc("/censor", NewCensor)
 
 	http.ListenAndServe("0.0.0.0:8080", nil)
+	log.Print("uraaka listening at 0.0.0.0:8080")
+
 }
 
 func NewPost(rw http.ResponseWriter, r *http.Request) {
