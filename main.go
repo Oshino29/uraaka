@@ -7,8 +7,8 @@ import (
 	"oshino29/uraaka/storage"
 	"path"
 	"time"
+	"fmt"
 	"oshino29/uraaka/storage/migrate"
-	"log"
 )
 
 var DB string = "/data/uraaka.db"
@@ -23,10 +23,9 @@ func main() {
 	http.HandleFunc("/", ShowPosts)
 	http.HandleFunc("/newpost", NewPost)
 	http.HandleFunc("/migrate", Migrate)
-	http.HandleFunc("/censor", NewCensor)
 
 	http.ListenAndServe("0.0.0.0:8080", nil)
-	log.Print("uraaka listening at 0.0.0.0:8080")
+	fmt.Print("uraaka listening at 0.0.0.0:8080")
 
 }
 
@@ -52,8 +51,4 @@ func Migrate(w http.ResponseWriter, r *http.Request) {
 	m := migrate.New(DB, "", "")
 	m.Migrate()
 	http.Redirect(w, r, r.Header.Get("Refe rer"), http.StatusFound)
-}
-
-func NewCensor(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }

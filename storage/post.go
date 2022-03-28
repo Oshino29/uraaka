@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"oshino29/uraaka/post"
 	"oshino29/uraaka/utils"
+	"strings"
 )
 
 const ExpireDay float64 = 3
@@ -14,6 +15,16 @@ func (s *Storage) AddPost(p *post.Post) bool {
 }
 
 func (s *Storage) AddRawPost(p *post.Post) bool {
+	// when command /censor detected, add censorword separated by space to database and return
+	if strings.HasPrefix(p.Text, "/censor"){
+		words := strings.Split(p.Text, " ")
+		for index := 1; index < len(words); index++ {
+			if len(words[index]) == 0 { continue }
+			s.AddCensorWord(words[index])
+		}
+		return true
+	}
+
 	p.RawToHtml(s.LoadCensorWords(), "#")
 	return s.AddPost(p)
 }

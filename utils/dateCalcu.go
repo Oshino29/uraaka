@@ -34,9 +34,8 @@ func HoursPast(timeString string) float64 {
 		fmt.Print(err.Error())
 		return -1
 	}
-	// return time.Since(timeParsed).Hours()
-	fmt.Printf("time.Now() in utils/dateCalcu.go/HoursPast() has returned:\n\t%s\n", time.Now().String())
-	return time.Now().Sub(timeParsed).Hours()
+	return time.Since(timeParsed).Hours()
+	// return time.Now().Sub(timeParsed).Hours()
 }
 
 func ParseTime(timeString string) (time.Time, error) {
