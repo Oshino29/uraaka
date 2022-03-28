@@ -55,6 +55,8 @@ func (s *Storage) LoadRecentPosts(days ...float64) []post.Post {
 	for rows.Next() {
 		rows.Scan(&p.Text, &html, &p.Time)
 		p.TextHTML = template.HTML(html)
+		// convert 2022-03-28 02:26:53 to 2022-03-28 02:26 for more compact view wehn display
+		p.Time = utils.StripSecondsFromTime(p.Time)
 		// p.TimeHTML = p.Time
 
 		// only add post to memory when post date is between x days before to now
