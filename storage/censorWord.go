@@ -1,7 +1,7 @@
 package storage
 
 func (s *Storage) AddCensorWord(w string) bool {
-	_, err := s.db.Exec("INSERT INTO censor_words (word) VALUES (?)", w)
+	_, err := s.db.Exec("INSERT OR IGNORE INTO censor_words (word) VALUES (?)", w)
 	return err == nil
 }
 func (s *Storage) LoadCensorWords() *[]string {

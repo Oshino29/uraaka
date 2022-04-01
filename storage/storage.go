@@ -41,8 +41,9 @@ func (s *Storage) Init() error {
 			);
 
 			CREATE TABLE IF NOT EXISTS censor_words (
-				id INTERGER PRIMARY KEY,
-				word TEXT
+				id INTEGER PRIMARY KEY,
+				word TEXT NOT NULL,
+				UNIQUE(word)
 			);
 
 			END;
